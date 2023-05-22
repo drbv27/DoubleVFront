@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { fetchUsers } from '../services/userService';
 
 const SavedUsers = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = () => {
-    axios
-      .get('http://localhost:3000/users')
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  fetchUsers()
+    .then((data) => {
+      setUsers(data);
+    });
+}, []);
 
   return (
     <div>

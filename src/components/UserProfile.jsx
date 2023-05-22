@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+import useExportUser from '../hooks/useExportUser';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AiFillGithub } from 'react-icons/ai';
 
@@ -7,7 +7,8 @@ import { AiFillGithub } from 'react-icons/ai';
 const UserProfile = () => {
   const { username } = useParams();
   const [user, setUser] = useState(null);
-    const navigate = useNavigate();
+  const handleExportar = useExportUser(user)
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://api.github.com/users/${username}`)
@@ -27,25 +28,6 @@ const UserProfile = () => {
     const handleGoBack = () => {
     navigate('/');
   };
-
-  const handleExportar = () => {
-  const userData = {
-    username: user.login,
-    githubId: user.id,
-    githubUrl: user.html_url,
-  };
-
-  axios.post('http://localhost:3000/users', userData)
-    .then((response) => {
-      console.log(response.data);
-      // Aquí puedes realizar alguna acción adicional, como mostrar un mensaje de éxito.
-    })
-    .catch((error) => {
-      console.error(error);
-      // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error.
-    });
-};
-
 
   return (
     <div className='bg-slate-300 flex flex-col items-center justify-center shadow-lg shadow-slate-500/50 rounded-lg p-5 mx-auto w-1/2 mt-4'>
