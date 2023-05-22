@@ -86,7 +86,7 @@ const UserChart = ({ users }) => {
 
   return (
     <div>
-      <h2 className='text-xl font-bold mb-2 text-center'>Gráfico de Barras - Seguidores de Usuarios</h2>
+      <h2 className='text-xl font-bold mb-2 text-center'>Seguidores de Usuarios</h2>
       <div style={{ height: '300px', marginTop: '2rem' }}>
         <Bar data={chartData} options={chartOptions} />
       </div>
